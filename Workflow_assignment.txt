@@ -1,0 +1,50 @@
+
+1. download imagem regiao
+
+2. combine bands (indice, 4, 8) from image + mask (qgis) (build virtual raster -- place each input file into a separate band)
+
+3. recortar
+
+4. raster mask num ficheiro diferente (rasterize 10m)
+
+CRS!! 3763
+
+juntar (B2, Nvdi + indice) + mask
+recortar
+retirar a mask (um da mask e outro do resto)
+
+
+
+RPGI = blue/(1-mean(blue + green + NIR))
+
+Coordinates PRM
+xmin: -8.821082
+ymax: 37.716542
+xmax: -8.606647
+ymin: 37.369733
+
+
+
+
+
+
+
+
+
+
+
+
+
+Workflow?
+Data preparation - podemos usar augmentation techniques para aumentar a variabilidade do dataset
+Model selection - escolher uma CNN architecture. maybe U-Net?
+Model training - the CNN model is trained on the dataset using a segmentation loss function such as the dice coefficient or cross-entropy loss. the model is initialized with pre-trained weights, and the final layers are fine-tuned for the task. the training process involves iterative optimization of the model parameters using gradient descent
+Hyperparameter tuning - learning rate, batch size, and number of epochs, need to be tuned to achieve optimal performance. This involves running experiments with different hyperparameters settings and evaluating the model performance on a validation set
+Model evaluation - the trained model is evaluated on a test set to assess its performance. This involves computing standard performance metrics such as precision, recall, and F1-score. The segmentation results can also be visually inspected and compared with ground truth annotation to assess the accuracy and generalization of the model.
+Deployment - once the model has been trained and evaluated, it can be deployed for use on new satellite images - HuggingFaces
+Para espreitares:
+tese sobre identificação de tuneis com machine learning: https://repositorio-aberto.up.pt/handle/10216/146814
+GitHub da tese: https://github.com/PedroMPCardoso/MonitoringGreenhousesPortugal 
+
+
+
