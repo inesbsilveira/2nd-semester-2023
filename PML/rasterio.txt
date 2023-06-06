@@ -1,0 +1,34 @@
+import rasterio
+from rasterio.windows import Window
+
+# Open the input raster file
+with rasterio.open('input_raster.tif') as src:
+
+    # Calculate the height and width of the sub-rasters
+    height = src.height // 4  # Divide the raster into 4 rows
+    width = src.width // 8  # Divide the raster into 8 columns
+
+    # Loop through each sub-raster and clip the data
+    for i in range(4):
+        for j in range(8):
+            # Define the window to clip the sub-raster
+            ymin = i * height
+            ymax = (i + 1) * height
+            xmin = j * width
+            xmax = (j + 1) * width
+            window = Window.from_slices((ymin, ymax), (xmin, xmax))
+
+            # Read the data within the window
+            clipped_data = src.read(window=window)
+
+            # Update the metadata for the clipped data
+            clipped_meta = src.meta.copy()
+            clipped_meta.update({
+                'height': window.height,
+                'width': window.width,
+                'transform': src.window_transform(window)
+            })
+
+            # Write the clipped data to a new raster file
+            with rasterio.open(f'sub_raster_{i}_{j}.tif', 'w', **clipped_meta) as dst:
+                dst.write(clipped_data)

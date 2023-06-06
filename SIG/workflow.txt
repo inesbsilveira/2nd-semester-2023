@@ -1,0 +1,35 @@
+PROBLEM 1
+
+1.
+1. donwload and merge 2 DEM  (DEM_merged)
+2. clip by extent - add coordinates (DEM_merged_clipped)
+3. raster calculator 
+4. poligonyze the layer
+5. select all areas where elevation = 1 and extract
+6. delete upper region
+6. dissolve and calculate area
+
+2. 
+1. raster calculator
+("DEM_merged_clipped@1" < 10) * 1 + ("DEM_merged_clipped@1" >= 10 AND "DEM_merged_clipped@1" < 15) * 2 + ("DEM_merged_clipped@1" >= 15) * 3 (DEM_high_moderate_low)
+2. clip raster by mask layer with "vulnerable_regions" (vulnerable_regions_risk)
+3. poligonyze 
+4. dissolve - select the field "risk" and calculate area in ha (vulnerable_region_risk_areas)
+
+
+Notas
+mathematical operation com expressão por baixo
+group by para calcular areas
+
+PROBLEM 3
+
+1. join NId to SoilUse (join by location - intersect and overlap) named SoilUse_OwnerID
+2. difference Cadastre - SoilUse named SoilUse_Other
+3. merge SoilUseOther + SoilUse_OwnerID named SoilUse_Other_OwnerID
+4. update SoilUseCod to 50 (if ("SoilUseCod" is null, 50, "SoilUseCod")
+5. merge prob2_22062 - parcel_13 + SoilUSe_Other_OwnerID ??
+
+PROBLEM 4
+
+
+
